@@ -1,0 +1,89 @@
+.App {
+  text-align: center;
+}
+
+table {
+  margin: 0 auto;
+}
+
+.buttons {
+  margin: 0 auto;
+  display: flex;
+  width: 500px;
+}
+
+.button {
+  background-color: #303030;
+  color: #50C8FF;
+  height: 30px;
+  width: 100px;
+  border-radius: 5px;
+  margin: 0 auto;
+  margin-bottom: 25px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+.button:hover {
+  background-color: #50C8FF;
+  color: #303030;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+.cell {
+  height: 100px;
+  width: 100px;
+  background-color: #303030;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.number {
+  color: #FFF;
+  font-size: 35px;
+}
+
+.score {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+.color-2 {
+  background-color: #235;
+}
+
+.color-4 {
+  background-color: #537;
+}
+
+.color-8 {
+  background-color: #4527;
+}
+
+.color-16 {
+  background-color: #568;
+}
+
+.color-32 {
+  background-color: #3334;
+}
+
+.color-64 {
+  background-color: #8092;
+}
+
+.color-128 {
+  background-color: #6678;
+}
+
+.color-256 {
+  background-color: #0997;
+}
