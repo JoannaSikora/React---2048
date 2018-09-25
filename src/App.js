@@ -56,25 +56,23 @@ class App extends Component {
 
 
   // Grab random number
-  //returns 2 or 4
+// returns 2048 or 1024
   randomNumber() {
-    const startingNumbers = [2,4];
+    const startingNumbers = [2048,1024];
     const randomNumber = startingNumbers[Math.floor(Math.random() * startingNumbers.length)];
     return randomNumber;
   }
 
   // Place random number on an empty coordinate
   //gets the board state
-  //why called three times first time????
   placeRandom(board) {
     // console.log(`Board state passed down to placeRandom: ${board}`);
     //passing updated board state to getblanks
     const blanks = this.getBlanks(board);
-    //get random blank coordinate in format [0,1]
     const randomCoordinate = blanks[Math.floor(Math.random() * blanks.length)];
-    //get 2 or 4
+    //get random numbers
     const randomNumber = this.randomNumber();
-    //?? push 2 or 4 to the boards [x,y] coordinates
+    //push numbers  to the boards [x,y] coordinates
     board[randomCoordinate[0]][randomCoordinate[1]] = randomNumber;
     //return updated board
     return board;
@@ -83,7 +81,6 @@ class App extends Component {
 
 
   // Compares two boards to check for movement
-  //???? what boards?
   //returns true or false if two boards are the same(false)
   boardMoved(original, updated) {
     return (JSON.stringify(updated) !== JSON.stringify(original)) ? true : false;
@@ -98,7 +95,7 @@ class App extends Component {
       if (direction === 'up') {
         //call appropriete func (up, down etc) and pass the current state of the board to it ==
         const movedUp = this.moveUp(this.state.board);
-        //????
+
         if (this.boardMoved(this.state.board, movedUp.board)) {
           const upWithRandom = this.placeRandom(movedUp.board);
 
@@ -167,13 +164,12 @@ class App extends Component {
 
     // Combine numbers and shift to right
     for (let i = 0; i < board.length; i++) {
-      //why j--?
-      //(get the board)
+
       for (let j = board[i].length - 1; j >= 0; j--) {
         //check if two neighboars are the same
         if (board[i][j] > 0 && board[i][j] === board[i][j - 1]) {
-        //add numbers
-          board[i][j] = board[i][j] * 2;
+        //substract numbers
+          board[i][j] = board[i][j] / 2;
           //reset the number
           board[i][j - 1] = 0;
           //add to the score
@@ -211,7 +207,7 @@ class App extends Component {
     for (let i = 0; i < board.length; i++) {
       for (let j = board[i].length - 1; j >= 0; j--) {
         if (board[i][j] > 0 && board[i][j] === board[i][j - 1]) {
-          board[i][j] = board[i][j] * 2;
+          board[i][j] = board[i][j] / 2;
           board[i][j - 1] = 0;
           score += board[i][j];
         } else if (board[i][j] === 0 && board[i][j - 1] > 0) {
@@ -245,7 +241,7 @@ class App extends Component {
     for (let i = 0; i < board.length; i++) {
       for (let j = 0; j < board.length; j++) {
         if (board[i][j] > 0 && board[i][j] === board[i][j + 1]) {
-          board[i][j] = board[i][j] * 2;
+          board[i][j] = board[i][j] / 2;
           board[i][j + 1] = 0;
           score += board[i][j];
         } else if (board[i][j] === 0 && board[i][j + 1] > 0) {
@@ -279,7 +275,7 @@ class App extends Component {
     for (let i = 0; i < board.length; i++) {
       for (let j = 0; j < board.length; j++) {
         if (board[i][j] > 0 && board[i][j] === board[i][j + 1]) {
-          board[i][j] = board[i][j] * 2;
+          board[i][j] = board[i][j] / 2;
           board[i][j + 1] = 0;
           score += board[i][j];
         } else if (board[i][j] === 0 && board[i][j + 1] > 0) {
@@ -327,17 +323,9 @@ class App extends Component {
   }
 
   // Check to see if there are any moves left
-  //uses boardMove to check if the board after the move is the same so thera are no more
-//DOES N~OT WORK
+  //uses boardMove to check if the board after the move is the same
   checkForGameOver(board) {
-    let moves = [
-      this.boardMoved(board, this.moveUp(board).board),
-      this.boardMoved(board, this.moveRight(board).board),
-      this.boardMoved(board, this.moveDown(board).board),
-      this.boardMoved(board, this.moveLeft(board).board)
-    ];
 
-    return (moves.includes(true)) ? false : true;
   }
 
 
@@ -365,11 +353,12 @@ class App extends Component {
   }
 
 //renders the table with the rows
-//renders the buttons, score and message from the state
+//renders the title, buttons, score and message from the state
 
   render() {
     return (
       <div>
+      <h1>2048</h1>
         <div className="button" onClick={()=>{this.initBoard()}}>New Game</div>
         <div className="score">Score: {this.state.score}</div>
 

@@ -1,3 +1,13 @@
+
+h1 {
+  font-size: 4.4rem;
+  font-family: 'Amatic SC', cursive;
+  text-align: center;
+  color: #F3AB68;
+  margin: 35px 0;
+
+}
+
 .App {
   text-align: center;
 }
@@ -32,7 +42,6 @@ table {
 .button:hover {
   background-color: #50C8FF;
   color: #303030;
-  transition: background-color 0.5s, color 0.5s;
 }
 
 .cell {
@@ -85,5 +94,18 @@ table {
 }
 
 .color-256 {
-  background-color: #0997;
+  background-color: #2997;
+}
+
+.color-512 {
+  background-color: #5527;
+}
+
+.color-1024 {
+  background-color: #812;
+
+}
+
+.color-2048 {
+  background-color: #3962;
 }

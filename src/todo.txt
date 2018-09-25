@@ -1,7 +1,2 @@
-1. why is placeRandom called three times first time?
-2. boardMoved?
-3. placing random after the move?
-4. rotate right left>>>??
-5. matrix??
-6. return {board} vs board
-7. check for gameover
+
+1. check for gameover
