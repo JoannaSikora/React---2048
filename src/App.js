@@ -20,8 +20,6 @@ class App extends Component {
 
   // Create board with two random coordinate numbers
   initBoard() {
-    //2d array
-    //called once
     let board = [];
     for (let i = 0; i < this.state.rows; i++) {
       const row = [];
@@ -31,69 +29,43 @@ class App extends Component {
       board.push(row);
     }
 
-    // console.log(`Board after pushing rows: ${board}`);
-    // console.log(`this.placerandom before calling it : ${this.placeRandom(board)}`);
-    //add TWO TIMES random coordinate numbers by calling placeRandpm
+
     board = this.placeRandom(this.placeRandom(board));
-    // console.log(`this.placerandom AFTER calling it : ${board}`);
-    //updating state for a new game
     this.setState({board, score: 0, gameOver: false, message: null});
   }
-
 
   // Get all blanks from board
   getBlanks(board) {
     const blanks = [];
-    // console.log(`Passed down Board state to check for  blanks: ${board}`);
     for (let i = 0; i < board.length; i++) {
       for (let j = 0; j < board[i].length; j++) {
         if (board[i][j] === 0) {blanks.push([i, j])}
       }
     }
-    // console.log(`Blanks after checking the boards state: ${blanks} `);
     return blanks;
   }
 
-
-  // Grab random number
-// returns 2048 or 1024
   randomNumber() {
     const startingNumbers = [2048,1024];
     const randomNumber = startingNumbers[Math.floor(Math.random() * startingNumbers.length)];
     return randomNumber;
   }
 
-  // Place random number on an empty coordinate
-  //gets the board state
   placeRandom(board) {
-    // console.log(`Board state passed down to placeRandom: ${board}`);
-    //passing updated board state to getblanks
     const blanks = this.getBlanks(board);
     const randomCoordinate = blanks[Math.floor(Math.random() * blanks.length)];
-    //get random numbers
     const randomNumber = this.randomNumber();
-    //push numbers  to the boards [x,y] coordinates
     board[randomCoordinate[0]][randomCoordinate[1]] = randomNumber;
-    //return updated board
     return board;
   }
 
-
-
-  // Compares two boards to check for movement
-  //returns true or false if two boards are the same(false)
   boardMoved(original, updated) {
     return (JSON.stringify(updated) !== JSON.stringify(original)) ? true : false;
   }
 
-
-  // Moves board depending on direction and checks for game over
-  //direction = gets keycodes from handleKeyDown up down etc
   move(direction) {
-    //first of all check for game over
     if (!this.state.gameOver) {
       if (direction === 'up') {
-        //call appropriete func (up, down etc) and pass the current state of the board to it ==
         const movedUp = this.moveUp(this.state.board);
 
         if (this.boardMoved(this.state.board, movedUp.board)) {
@@ -144,7 +116,6 @@ class App extends Component {
     }
   }
 
-//funcs for movements
   moveUp(currentBoard) {
     //rotation needed for moves up and down to deal with the arrays
     let rotatedRight = this.rotateRight(currentBoard);
@@ -185,7 +156,6 @@ class App extends Component {
 
     // Rotate board back upright
     board = this.rotateLeft(board);
-//return new board and new score
     return {board, score};
   }
 
@@ -288,9 +258,6 @@ class App extends Component {
     return {board, score};
   }
 
-
-
-//rotates the board to deal with the arrays with shifting cells
   rotateRight(currentBoard) {
     let result = [];
 
@@ -302,12 +269,9 @@ class App extends Component {
       result.push(row);
     }
 
-// console.log(`Result: ${result}`);
-// console.log(`CurrentBoard: ${currentBoard}`);
     return result;
   }
 
-//rotates the board back to the first position
   rotateLeft(currentBoard) {
     let result = [];
 
@@ -322,20 +286,15 @@ class App extends Component {
     return result;
   }
 
-  // Check to see if there are any moves left
-  //uses boardMove to check if the board after the move is the same
   checkForGameOver(board) {
-
   }
 
 
-//renders the board for the first time and handles keycode events
   componentWillMount() {
     this.initBoard();
     window.addEventListener('keydown', this.handleKeyDown);
   }
 
-//keyCode events
   handleKeyDown(e) {
 
     if (e.keyCode === 38) {
@@ -351,9 +310,6 @@ class App extends Component {
       this.move('left');
     }
   }
-
-//renders the table with the rows
-//renders the title, buttons, score and message from the state
 
   render() {
     return (

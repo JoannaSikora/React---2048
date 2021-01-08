@@ -1,2 +1,0 @@
-
-1. check for gameover
